@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1526130285 source:c:\users\k i n g\desktop\red-black-tree\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<windows.h>
+	<ctype.h>
+	<conio.h>
+	<time.h>
+

@@ -1,0 +1,69 @@
+nt apply(char op, int a, int b) {
+    switch (op) { 
+       case '+': return a + b;
+       case '-': return a - b;
+       case '/': return a / b;
+       case '*': return a * b;
+       default: throw bad_operator(op);
+    }
+}
+
+int expression(char *&input) {
+    char op = *input++;
+
+    if (isdigit(op)) 
+       return op - '0';
+
+    int a = expression(input);
+    int b = expression(input);
+    return apply(op, a, b);
+}
+int eval(const char *s, const char **outptr)
+{
+    int a, b, y;
+    const char out;
+
+    switch (s) {
+    case '+':
+        a = eval(s + 1, &out);
+        b = eval(out, &out);
+        y = a + b;
+        *outptr = out;
+        break;
+    case '-':
+        a = eval(s + 1, &out);
+        b = eval(out, &out);
+        y = a - b;
+        outptr = out;
+        break;
+    case '':
+        a = eval(s + 1, &out);
+        b = eval(out, &out);
+        y = a * b;
+        *outptr = out;
+        break;
+    case '/':
+        a = eval(s + 1, &out);
+        b = eval(out, &out);
+        y = a / b;
+        outptr = out;
+        break;
+    default: / '0'...'9'assumed */
+        y = *s - '0';
+        *outptr = s + 1;
+        break;
+    }
+
+    return y;
+}
+
+int main(int argc, char *argv[])
+{
+    const char *end;
+    int x;
+
+    x = eval(argv[1], &end);
+    printf("%d\n", x);
+
+    return 0;
+}
